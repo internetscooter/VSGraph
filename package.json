@@ -1,7 +1,7 @@
 {
     "name": "vsgraph",
     "displayName": "vsgraph",
-    "description": "vsgraph",
+    "description": "VS Code Graphs",
     "version": "0.0.1",
     "publisher": "internetscooter",
     "engines": {
@@ -11,14 +11,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.vsgraph"
+        "onCommand:vsgraph"
     ],
     "main": "./extension",
     "contributes": {
         "commands": [
             {
                 "command": "extension.vsgraph",
-                "title": "vsgraph"
+                "title": "Start vsgraph"
             }
         ]
     },
