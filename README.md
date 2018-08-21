@@ -1,6 +1,6 @@
-# vsgraph README
+# VSGraph README
 
-vsgraph - Graphs for VS Code
+VSGraph - Graphs for VS Code
 
 ## Features
 
