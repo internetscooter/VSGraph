@@ -17,7 +17,7 @@ class VSGraph {
         <title>Cat Coding</title>
     </head>
     <body>
-        <img src="${catGif}" width="300" />
+        <p>Insert graph here!</p>
     </body>
     </html>`;
     }
@@ -25,11 +25,10 @@ class VSGraph {
 
 let vsgraph = new VSGraph();
 
-// this method is called when vsgraph extension is activated
+// this method is called when VSGraph extension is activated
 function activate(context) {
 
     console.log('"VSGraph" is now active!');
-    console.log(context.extensionPath);
 
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with registerCommand
@@ -45,7 +44,7 @@ function activate(context) {
                 localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'vscode-resource'))]
             }
         )
-        // Display a message box to the user
+       
         // Get path to resource on disk
         const onDiskPath = vscode.Uri.file(path.join(context.extensionPath, 'vscode-resource', 'cat.gif'));
 
@@ -54,6 +53,7 @@ function activate(context) {
 
         // panel.webview.html = getWebviewContent(catGifSrc);
         panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
+        console.log(catGifSrc);
 
         // Display a message box to the user
         vscode.window.showInformationMessage('Hello Graphs! Not!');
