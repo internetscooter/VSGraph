@@ -19,7 +19,7 @@ function activate(context) {
             vscode.ViewColumn.One,
             {
                 // Only allow the webview to access resources in our extension's vscode-resource directory
-                // localResourceRoots: [vscode.Uri.file(path.join(extensionPath, 'vscode-resource'))]
+                localResourceRoots: [vscode.Uri.file(path.join(context.extensionPath, 'vscode-resource'))]
             }
         )
         // Display a message box to the user
