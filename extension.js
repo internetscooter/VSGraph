@@ -1,10 +1,12 @@
 // The module 'vscode' contains the VS Code extensibility API
 const vscode = require('vscode');
+const path = require('path');
 
 // this method is called when your extension is activated
 function activate(context) {
 
     console.log('"vsgraph" is now active!');
+    console.log(context.extensionPath);
 
     // The command has been defined in the package.json file
     // Now provide the implementation of the command with  registerCommand
@@ -15,10 +17,21 @@ function activate(context) {
             'vsgraph',
             "vsgraph",
             vscode.ViewColumn.One,
-            {}
+            {
+                // Only allow the webview to access resources in our extension's vscode-resource directory
+                // localResourceRoots: [vscode.Uri.file(path.join(extensionPath, 'vscode-resource'))]
+            }
         )
         // Display a message box to the user
-        panel.webview.html = getWebviewContent();
+        // Get path to resource on disk
+        const onDiskPath = vscode.Uri.file(path.join(context.extensionPath, 'vscode-resource', 'cat.gif'));
+
+        // And get the special URI to use with the webview
+        const catGifSrc = onDiskPath.with({ scheme: 'vscode-resource' });
+
+        panel.webview.html = getWebviewContent(catGifSrc);
+
+        // Display a message box to the user
         vscode.window.showInformationMessage('Hello Graphs! Not!');
 
         //Clean up
@@ -36,7 +49,7 @@ function deactivate() {
 exports.deactivate = deactivate;
 
 
-function getWebviewContent() {
+function getWebviewContent(catGif) {
     return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +58,7 @@ function getWebviewContent() {
     <title>Cat Coding</title>
 </head>
 <body>
-    <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" width="300" />
+    <img src="${catGif}" width="300" />
 </body>
 </html>`;
 }
