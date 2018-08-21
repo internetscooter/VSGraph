@@ -1,6 +1,7 @@
 // The module 'vscode' contains the VS Code extensibility API
 const vscode = require('vscode');
 const path = require('path');
+vsgraph = new vsgraph();
 
 // this method is called when your extension is activated
 function activate(context) {
@@ -30,6 +31,7 @@ function activate(context) {
         const catGifSrc = onDiskPath.with({ scheme: 'vscode-resource' });
 
         panel.webview.html = getWebviewContent(catGifSrc);
+        panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
 
         // Display a message box to the user
         vscode.window.showInformationMessage('Hello Graphs! Not!');
@@ -61,4 +63,23 @@ function getWebviewContent(catGif) {
     <img src="${catGif}" width="300" />
 </body>
 </html>`;
+}
+
+class vsgraph {
+    constructor() {
+        this.name = "vsgraph";
+    }
+    getWebviewContent(catGif) {
+        return `<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cat Coding</title>
+    </head>
+    <body>
+        <img src="${catGif}" width="300" />
+    </body>
+    </html>`;
+    }
 }
