@@ -1,11 +1,12 @@
-// The module 'vscode' contains the VS Code extensibility API
-const vscode = require('vscode');
+//VS Code extensibility API
+const vscode = require('vscode'); 
 const path = require('path');
-
 
 class VSGraph {
     constructor() {
-        this.name = "vsgraph";
+        this.name = "VSGraph";
+        this.viewType = "VSGraph";
+        this.viewTitle = "VSGraph";
     }
     getWebviewContent(catGif) {
         return `<!DOCTYPE html>
@@ -24,20 +25,20 @@ class VSGraph {
 
 let vsgraph = new VSGraph();
 
-// this method is called when your extension is activated
+// this method is called when vsgraph extension is activated
 function activate(context) {
 
-    console.log('"vsgraph" is now active!');
+    console.log('"VSGraph" is now active!');
     console.log(context.extensionPath);
 
     // The command has been defined in the package.json file
-    // Now provide the implementation of the command with  registerCommand
+    // Now provide the implementation of the command with registerCommand
     // The commandId parameter must match the command field in package.json
-    let disposable = vscode.commands.registerCommand('extension.vsgraph', function () {
+    let disposable = vscode.commands.registerCommand('extension.VSGraph', function () {
         // The code you place here will be executed every time your command is executed
         const panel = vscode.window.createWebviewPanel(
-            'vsgraph',
-            "vsgraph",
+            vsgraph.viewType,
+            vsgraph.viewTitle,
             vscode.ViewColumn.One,
             {
                 // Only allow the webview to access resources in our extension's vscode-resource directory
@@ -70,5 +71,3 @@ exports.activate = activate;
 function deactivate() {
 }
 exports.deactivate = deactivate;
-
-

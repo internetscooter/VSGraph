@@ -1,6 +1,6 @@
 {
-    "name": "vsgraph",
-    "displayName": "vsgraph",
+    "name": "VSGraph",
+    "displayName": "VSGraph",
     "description": "Graphs for VS Code",
     "version": "0.0.1",
     "publisher": "internetscooter",
@@ -11,14 +11,14 @@
         "Other"
     ],
     "activationEvents": [
-        "onCommand:extension.vsgraph"
+        "onCommand:extension.VSGraph"
     ],
     "main": "./extension",
     "contributes": {
         "commands": [
             {
-                "command": "extension.vsgraph",
-                "title": "Start vsgraph"
+                "command": "extension.VSGraph",
+                "title": "Start VSGraph"
             }
         ]
     },
