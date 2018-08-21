@@ -2,6 +2,9 @@
 
 VSGraph - Graphs for VS Code
 
+This is an implementation of mxgraph
+https://github.com/jgraph/mxgraph (portions of the code can be found in the mxgraph subdirectory including the Apache 2.0 License)
+
 ## Features
 
 Current:
