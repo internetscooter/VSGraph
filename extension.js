@@ -20,9 +20,13 @@ function activate(context) {
         // Display a message box to the user
         panel.webview.html = getWebviewContent();
         vscode.window.showInformationMessage('Hello Graphs! Not!');
+
+        //Clean up
+        panel.onDidDispose(() => {/*any clean up code goes here */}, null, context.subscriptions)
     });
 
     context.subscriptions.push(disposable);
+
 }
 exports.activate = activate;
 
