@@ -21,7 +21,7 @@ class VSGraph {
     </body>
     </html>`;
     }
-    getHelloWorld(msClient){
+    getHelloWorld(mxClientSrc){
         return `
         <!--
           Copyright (c) 2006-2018, JGraph Ltd
@@ -31,13 +31,8 @@ class VSGraph {
         -->
         <html>
         <head>
-            <title>Hello, World! example for mxGraph</title>
-        
-            <!-- Sets the basepath for the library if not in same directory -->
-            <script type="text/javascript">
-                mxBasePath = '../src';
-            </script>
-        
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <!-- Loads and initializes the library -->
             <script type="text/javascript" src="${mxClientSrc}"></script>
         
@@ -134,8 +129,8 @@ function activate(context) {
         console.log(mxClientSrc);
         // panel.webview.html = getWebviewContent(catGifSrc);
         //panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
-
-        panel.webview.html = vsgraph.getHelloWorld(mxClientSrc)
+        console.log(vsgraph.getHelloWorld(mxClientSrc));
+        panel.webview.html = vsgraph.getHelloWorld(mxClientSrc);
 
 
         // Display a message box to the user

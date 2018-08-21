@@ -2,6 +2,8 @@
 
 VSGraph - Graphs for VS Code
 
+![Hello World Graph](helloworld.png)
+
 This is an implementation of mxgraph
 https://github.com/jgraph/mxgraph (portions of the code can be found in the mxgraph subdirectory including the Apache 2.0 License)
 
