@@ -10,19 +10,7 @@ class VSGraph {
         this.vscodeResource = {};
         this.extensionPath = "";
     }
-    getWebviewContent(catGif) {
-        return `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cat Coding</title>
-    </head>
-    <body>
-        <p>Insert graph here!</p>
-    </body>
-    </html>`;
-    }
+    // simple hello world from msGraph examples
     getHelloWorld(){
         return `
         <!--
@@ -89,7 +77,7 @@ class VSGraph {
         
             <!-- Creates a container for the graph with a grid wallpaper -->
             <div id="graphContainer"
-                style="position:relative;overflow:hidden;width:321px;height:241px;background:url('${this.vscodeResource['grid.gif']}');cursor:default;">
+                style="position:relative;overflow:hidden;width:321px;height:241px;background:url('${this.vscodeResource['images/grid.gif']}');cursor:default;">
             </div>
         </body>
         </html>`;
@@ -100,9 +88,9 @@ class VSGraph {
         this.extensionPath = extensionPath;
         // get all the local resources required for VSGraph
         vsgraph.addResource('mxClient.js');
-        vsgraph.addResource('grid.gif');
+        vsgraph.addResource('images/grid.gif');
     }
-    
+
     // get individual resource and add to dictionary
     addResource(resourceString){
         // Get path to resource on disk
