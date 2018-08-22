@@ -8,6 +8,7 @@ class VSGraph {
         this.viewType = "VSGraph";
         this.viewTitle = "VSGraph";
         this.vscodeResource = {};
+        this.extensionPath = "";
     }
     getWebviewContent(catGif) {
         return `<!DOCTYPE html>
@@ -93,12 +94,19 @@ class VSGraph {
         </body>
         </html>`;
     }
+
     // collect resources required for webview in a dictionary for ease of use
-    addResource(extensionPath,resourceString){
-
+    addResources(extensionPath){
+        this.extensionPath = extensionPath;
+        // get all the local resources required for VSGraph
+        vsgraph.addResource('mxClient.js');
+        vsgraph.addResource('grid.gif');
+    }
+    
+    // get individual resource and add to dictionary
+    addResource(resourceString){
         // Get path to resource on disk
-        const onDiskPath = vscode.Uri.file(path.join(extensionPath, 'vscode-resource', resourceString));
-
+        const onDiskPath = vscode.Uri.file(path.join(this.extensionPath, 'vscode-resource', resourceString));
         // And get the special URI to use with the webview
         const resObject = onDiskPath.with({ scheme: 'vscode-resource' });
         this.vscodeResource[resourceString] = resObject;
@@ -129,11 +137,10 @@ function activate(context) {
             }
         )
 
-        // get all the local resources required for VSGraph
-        vsgraph.addResource(context.extensionPath, 'mxClient.js');
-        vsgraph.addResource(context.extensionPath, 'grid.gif');
+        // load local resources from extensionPath/vscode-resource
+        vsgraph.addResources(context.extensionPath);
 
-        console.log(vsgraph.vscodeResource);
+        // console.log(vsgraph.vscodeResource);
         // panel.webview.html = getWebviewContent(catGifSrc);
         //panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
         // console.log(vsgraph.getHelloWorld());
@@ -141,7 +148,7 @@ function activate(context) {
 
 
         // Display a message box to the user
-        vscode.window.showInformationMessage('Hello Graphs! Not!');
+        vscode.window.showInformationMessage('Hello Graphs!');
 
         //Clean up
         panel.onDidDispose(() => {/*any clean up code goes here */}, null, context.subscriptions)
