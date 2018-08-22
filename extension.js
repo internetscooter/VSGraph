@@ -83,12 +83,31 @@ class VSGraph {
         </html>`;
     }
 
-    // collect resources required for webview in a dictionary for ease of use
+    // Collect resources required for webview in a dictionary for ease of use
+    // This allows us to change any local file references to local vscode-resource references
+    // e.g. src="./src/something.js" to src="${this.vscodeResource['src/something.js']}
+    // e.g. <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
     addResources(extensionPath){
         this.extensionPath = extensionPath;
         // get all the local resources required for VSGraph
         vsgraph.addResource('mxClient.js');
         vsgraph.addResource('images/grid.gif');
+        vsgraph.addResource('js/Init.js');
+        vsgraph.addResource('deflate/pako.min.js');
+        vsgraph.addResource('deflate/base64.js');
+        vsgraph.addResource('jscolor/jscolor.js');
+        vsgraph.addResource('sanitizer/sanitizer.min.js');
+        vsgraph.addResource('js/EditorUi.js');
+        vsgraph.addResource('js/Editor.js');
+        vsgraph.addResource('js/Sidebar.js');
+        vsgraph.addResource('js/Graph.js');
+        vsgraph.addResource('js/Format.js');
+        vsgraph.addResource('js/Shapes.js');
+        vsgraph.addResource('js/Actions.js');
+        vsgraph.addResource('js/Menus.js');
+        vsgraph.addResource('js/Toolbar.js');
+        vsgraph.addResource('js/Dialogs.js');
+        vsgraph.addResource('styles/grapheditor.css');
     }
 
     // get individual resource and add to dictionary
