@@ -88,10 +88,20 @@ class VSGraph {
         
             <!-- Creates a container for the graph with a grid wallpaper -->
             <div id="graphContainer"
-                style="position:relative;overflow:hidden;width:321px;height:241px;background:url('editors/images/grid.gif');cursor:default;">
+                style="position:relative;overflow:hidden;width:321px;height:241px;background:url('${this.vscodeResource['grid.gif']}');cursor:default;">
             </div>
         </body>
         </html>`;
+    }
+    // collect resources required for webview in a dictionary for ease of use
+    addResource(extensionPath,resourceString){
+
+        // Get path to resource on disk
+        const onDiskPath = vscode.Uri.file(path.join(extensionPath, 'vscode-resource', resourceString));
+
+        // And get the special URI to use with the webview
+        const resObject = onDiskPath.with({ scheme: 'vscode-resource' });
+        this.vscodeResource[resourceString] = resObject;
     }
 }
 
@@ -119,19 +129,14 @@ function activate(context) {
             }
         )
 
+        // get all the local resources required for VSGraph
+        vsgraph.addResource(context.extensionPath, 'mxClient.js');
+        vsgraph.addResource(context.extensionPath, 'grid.gif');
 
-        // Get path to resource on disk
-        //const onDiskPath = vscode.Uri.file(path.join(context.extensionPath, 'vscode-resource', 'cat.gif'));
-        const onDiskPathmxClient = vscode.Uri.file(path.join(context.extensionPath, 'vscode-resource', 'mxClient.js'));
-
-        // And get the special URI to use with the webview
-        //const catGifSrc = onDiskPath.with({ scheme: 'vscode-resource' });
-        const mxClientSrc = onDiskPathmxClient.with({ scheme: 'vscode-resource' });
-        vsgraph.vscodeResource['mxClient.js'] = mxClientSrc;
         console.log(vsgraph.vscodeResource);
         // panel.webview.html = getWebviewContent(catGifSrc);
         //panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
-        console.log(vsgraph.getHelloWorld());
+        // console.log(vsgraph.getHelloWorld());
         panel.webview.html = vsgraph.getHelloWorld();
 
 
