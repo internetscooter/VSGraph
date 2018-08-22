@@ -7,6 +7,7 @@ class VSGraph {
         this.name = "VSGraph";
         this.viewType = "VSGraph";
         this.viewTitle = "VSGraph";
+        this.vscodeResource = {};
     }
     getWebviewContent(catGif) {
         return `<!DOCTYPE html>
@@ -21,7 +22,7 @@ class VSGraph {
     </body>
     </html>`;
     }
-    getHelloWorld(mxClientSrc){
+    getHelloWorld(){
         return `
         <!--
           Copyright (c) 2006-2018, JGraph Ltd
@@ -34,7 +35,7 @@ class VSGraph {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <!-- Loads and initializes the library -->
-            <script type="text/javascript" src="${mxClientSrc}"></script>
+            <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
         
             <!-- Example code -->
             <script type="text/javascript">
@@ -126,11 +127,12 @@ function activate(context) {
         // And get the special URI to use with the webview
         //const catGifSrc = onDiskPath.with({ scheme: 'vscode-resource' });
         const mxClientSrc = onDiskPathmxClient.with({ scheme: 'vscode-resource' });
-        console.log(mxClientSrc);
+        vsgraph.vscodeResource['mxClient.js'] = mxClientSrc;
+        console.log(vsgraph.vscodeResource);
         // panel.webview.html = getWebviewContent(catGifSrc);
         //panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
-        console.log(vsgraph.getHelloWorld(mxClientSrc));
-        panel.webview.html = vsgraph.getHelloWorld(mxClientSrc);
+        console.log(vsgraph.getHelloWorld());
+        panel.webview.html = vsgraph.getHelloWorld();
 
 
         // Display a message box to the user
