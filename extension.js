@@ -37,6 +37,12 @@ class VSGraph {
         this.addResource('deflate/base64.js');
         this.addResource('jscolor/jscolor.js');
         this.addResource('sanitizer/sanitizer.min.js');
+
+        // mxClient internal resources
+        this.addResource('resources/grapheditor.txt');
+        this.addResource('resources/grapheditor_de.txt');
+        this.addResource('resources/help.html');
+        this.addResource('resources/help_de.html');
     }
 
     // get individual resource and add to dictionary (VSGraph uses ./vscode-resource to store resources)
@@ -177,6 +183,11 @@ class VSGraph {
                     <script type="text/javascript" src="${this.vscodeResource['js/Menus.js']}"></script>
                     <script type="text/javascript" src="${this.vscodeResource['js/Toolbar.js']}"></script>
                     <script type="text/javascript" src="${this.vscodeResource['js/Dialogs.js']}"></script>
+                    
+                    <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor.txt']}"></script>
+                    <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor_de.txt']}"></script>
+                    <script type="text/javascript" src="${this.vscodeResource['resources/help.html']}"></script>
+                    <script type="text/javascript" src="${this.vscodeResource['resources/help_de.html']}"></script>
             </head>
             <body class="geEditor">
                     <script type="text/javascript">
