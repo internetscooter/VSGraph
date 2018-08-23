@@ -24,7 +24,7 @@ class VSGraph {
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <!-- Loads and initializes the library -->
-            <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
+            <script type="text/javascript" src="${this.vscodeResource['js/mxClient.js']}"></script>
         
             <!-- Example code -->
             <script type="text/javascript">
@@ -90,13 +90,8 @@ class VSGraph {
     addResources(extensionPath){
         this.extensionPath = extensionPath;
         // get all the local resources required for VSGraph
-        this.addResource('mxClient.js');
-        this.addResource('images/grid.gif');
+        this.addResource('js/mxClient.js');
         this.addResource('js/Init.js');
-        this.addResource('deflate/pako.min.js');
-        this.addResource('deflate/base64.js');
-        this.addResource('jscolor/jscolor.js');
-        this.addResource('sanitizer/sanitizer.min.js');
         this.addResource('js/EditorUi.js');
         this.addResource('js/Editor.js');
         this.addResource('js/Sidebar.js');
@@ -108,6 +103,11 @@ class VSGraph {
         this.addResource('js/Toolbar.js');
         this.addResource('js/Dialogs.js');
         this.addResource('styles/grapheditor.css');
+        this.addResource('images/grid.gif');
+        this.addResource('deflate/pako.min.js');
+        this.addResource('deflate/base64.js');
+        this.addResource('jscolor/jscolor.js');
+        this.addResource('sanitizer/sanitizer.min.js');
     }
 
     // get individual resource and add to dictionary (VSGraph uses ./vscode-resource to store resources)
