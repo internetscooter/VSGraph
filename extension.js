@@ -103,17 +103,44 @@ class VSGraph {
                 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
                 <link rel="stylesheet" type="text/css" href="${this.vscodeResource['styles/grapheditor.css']}">
-                <script type="text/javascript" src="${this.vscodeResource['js/URLParams.js']}"></script>
+                <script type="text/javascript">
+                // Parses URL parameters. Supported parameters are:
+                // - lang=xy: Specifies the language of the user interface.
+                // - touch=1: Enables a touch-style user interface.
+                // - storage=local: Enables HTML5 local storage.
+                // - chrome=0: Chromeless mode.
+                var urlParams = (function(url)
+                {
+                    var result = new Object();
+                    var idx = url.lastIndexOf('?');
+            
+                    if (idx > 0)
+                    {
+                        var params = url.substring(idx + 1).split('&');
+                        
+                        for (var i = 0; i < params.length; i++)
+                        {
+                            idx = params[i].indexOf('=');
+                            
+                            if (idx > 0)
+                            {
+                                result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                            }
+                        }
+                    }
+                    
+                    return result;
+                })(window.location.href);
+            
+                // Default resources are included in grapheditor resources
+                var mxLoadResources = false;
+                var mxBasePath = "${this.extensionPath}//";
+                </script>
                 <script type="text/javascript" src="${this.vscodeResource['js/Init.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['deflate/pako.min.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['deflate/base64.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['jscolor/jscolor.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['sanitizer/sanitizer.min.js']}"></script>
-                <script type="text/javascript">
-                // Default resources are included in grapheditor resources
-                var mxLoadResources = false;
-                var mxBasePath = "${this.vscodeResource['\\'].path}";
-                </script>
                 <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['js/EditorUi.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['js/Editor.js']}"></script>
@@ -292,18 +319,13 @@ function activate(context) {
         // load local resources from extensionPath/vscode-resource
         vsgraph.addResources(context.extensionPath);
 
-        // console.log(vsgraph.vscodeResource);
-        // panel.webview.html = getWebviewContent(catGifSrc);
-        //panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
-        // console.log(vsgraph.getHelloWorld());
-        // panel.webview.html = vsgraph.getHelloWorld();
+        panel.webview.html = vsgraph.getHelloWorld();
+        // panel.webview.html = vsgraph.getViewerHtml();
         // TODO - full client...
         // panel.webview.html = vsgraph.getIndexHtml();
-        panel.webview.html = vsgraph.getViewerHtml();
-
-
+        
         // Display a message box to the user
-        vscode.window.showInformationMessage('Hello Graphs!');
+        vscode.window.showInformationMessage('Hello Graphs! Maybe?');
 
         //Clean up
         panel.onDidDispose(() => {/*any clean up code goes here */}, null, context.subscriptions)
