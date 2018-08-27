@@ -56,6 +56,8 @@ class VSGraph {
 
         // simple hello world from msGraph examples
         getHelloWorld(){
+            this.addResource('mxClient.js');
+            this.addResource('js/HelloWorld.js');
             return `
             <!--
               Copyright (c) 2006-2018, JGraph Ltd
@@ -66,58 +68,21 @@ class VSGraph {
             <html>
             <head>
                 <meta charset="UTF-8">
+                <!-- Get this working later...
+                <meta http-equiv="Content-Security-Policy" content="
+                default-src 'self' 'unsafe-eval' *.jgraph.com *.draw.io apis.google.com *.googleapis.com drive.google.com api.trello.com js.live.net code.jquery.com www.dropbox.com;
+                style-src *.draw.io *.jgraph.com;
+                img-src https://* data:;
+                child-src content.googleapis.com accounts.google.com;">
+                -->
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <!-- Loads and initializes the library -->
-                <script type="text/javascript" src="${this.vscodeResource['js/mxClient.js']}"></script>
-            
-                <!-- Example code -->
-                <script type="text/javascript">
-                    // Program starts here. Creates a sample graph in the
-                    // DOM node with the specified ID. This function is invoked
-                    // from the onLoad event handler of the document (see below).
-                    function main(container)
-                    {
-                        // Checks if the browser is supported
-                        if (!mxClient.isBrowserSupported())
-                        {
-                            // Displays an error message if the browser is not supported.
-                            mxUtils.error('Browser is not supported!', 200, false);
-                        }
-                        else
-                        {
-                            // Disables the built-in context menu
-                            mxEvent.disableContextMenu(container);
-                            
-                            // Creates the graph inside the given container
-                            var graph = new mxGraph(container);
-            
-                            // Enables rubberband selection
-                            new mxRubberband(graph);
-                            
-                            // Gets the default parent for inserting new cells. This
-                            // is normally the first child of the root (ie. layer 0).
-                            var parent = graph.getDefaultParent();
-                                            
-                            // Adds cells to the model in a single step
-                            graph.getModel().beginUpdate();
-                            try
-                            {
-                                var v1 = graph.insertVertex(parent, null, 'Hello,', 20, 20, 80, 30);
-                                var v2 = graph.insertVertex(parent, null, 'World!', 200, 150, 80, 30);
-                                var e1 = graph.insertEdge(parent, null, '', v1, v2);
-                            }
-                            finally
-                            {
-                                // Updates the display
-                                graph.getModel().endUpdate();
-                            }
-                        }
-                    };
-                </script>
+                <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/HelloWorld.js']}"></script>
             </head>
-            
+             
             <!-- Page passes the container for the graph to the program -->
-            <body onload="main(document.getElementById('graphContainer'))">
+            <body onload="HelloWorld(document.getElementById('graphContainer'))">
             
                 <!-- Creates a container for the graph with a grid wallpaper -->
                 <div id="graphContainer"
@@ -184,10 +149,12 @@ class VSGraph {
                     <script type="text/javascript" src="${this.vscodeResource['js/Toolbar.js']}"></script>
                     <script type="text/javascript" src="${this.vscodeResource['js/Dialogs.js']}"></script>
                     
+                    <!--
                     <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor.txt']}"></script>
                     <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor_de.txt']}"></script>
                     <script type="text/javascript" src="${this.vscodeResource['resources/help.html']}"></script>
                     <script type="text/javascript" src="${this.vscodeResource['resources/help_de.html']}"></script>
+                    -->
             </head>
             <body class="geEditor">
                     <script type="text/javascript">
