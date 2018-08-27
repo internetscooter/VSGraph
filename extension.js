@@ -93,68 +93,45 @@ class VSGraph {
         }
 
         getIndexHtml(){
+            this.addResource('js\URLParams.js');
+            this.addResource('\\');
+            console.log(this.vscodeResource);
             return `
             <html>
             <head>
                 <title>Grapheditor</title>
-                    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-                    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
                 <link rel="stylesheet" type="text/css" href="${this.vscodeResource['styles/grapheditor.css']}">
-                    <script type="text/javascript">
-                            // Parses URL parameters. Supported parameters are:
-                            // - lang=xy: Specifies the language of the user interface.
-                            // - touch=1: Enables a touch-style user interface.
-                            // - storage=local: Enables HTML5 local storage.
-                            // - chrome=0: Chromeless mode.
-                            var urlParams = (function(url)
-                            {
-                                    var result = new Object();
-                                    var idx = url.lastIndexOf('?');
-
-                                    if (idx > 0)
-                                    {
-                                            var params = url.substring(idx + 1).split('&');
-
-                                            for (var i = 0; i < params.length; i++)
-                                            {
-                                                    idx = params[i].indexOf('=');
-
-                                                    if (idx > 0)
-                                                    {
-                                                            result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
-                                                    }
-                                            }
-                                    }
-
-                                    return result;
-                            })(window.location.href);
-
-                            // Default resources are included in grapheditor resources
-                            mxLoadResources = false;
-                    </script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Init.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['deflate/pako.min.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['deflate/base64.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['jscolor/jscolor.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['sanitizer/sanitizer.min.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/EditorUi.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Editor.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Sidebar.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Graph.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Format.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Shapes.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Actions.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Menus.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Toolbar.js']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['js/Dialogs.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/URLParams.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Init.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['deflate/pako.min.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['deflate/base64.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['jscolor/jscolor.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['sanitizer/sanitizer.min.js']}"></script>
+                <script type="text/javascript">
+                // Default resources are included in grapheditor resources
+                var mxLoadResources = false;
+                var mxBasePath = "${this.vscodeResource['\\'].path}";
+                </script>
+                <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/EditorUi.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Editor.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Sidebar.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Graph.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Format.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Shapes.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Actions.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Menus.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Toolbar.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Dialogs.js']}"></script>
                     
-                    <!--
-                    <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor.txt']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor_de.txt']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['resources/help.html']}"></script>
-                    <script type="text/javascript" src="${this.vscodeResource['resources/help_de.html']}"></script>
-                    -->
+                <!--
+                <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor.txt']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['resources/grapheditor_de.txt']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['resources/help.html']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['resources/help_de.html']}"></script>
+                -->
             </head>
             <body class="geEditor">
                     <script type="text/javascript">
@@ -185,10 +162,9 @@ class VSGraph {
 
                                     // Adds required resources (disables loading of fallback properties, this can only
                                     // be used if we know that all keys are defined in the language specific file)
-                                    mxResources.loadDefaultBundle = false;
+                                    // mxResources.loadDefaultBundle = false;
                                     var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
                                             mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
-
                                     // Fixes possible asynchronous requests
                                     mxUtils.getAll([bundle, STYLE_PATH + '/default.xml'], function(xhr)
                                     {
@@ -200,6 +176,7 @@ class VSGraph {
                                             themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
 
                                             // Main
+                                            var urlParams = URLParams(window.location.href);
                                             new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
                                     }, function()
                                     {
@@ -210,6 +187,81 @@ class VSGraph {
             </body>
             </html>
             `
+        }
+
+        getViewerHtml(){
+            return `
+            <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=5,IE=9" ><![endif]-->
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>Grapheditor viewer</title>
+                <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+                <script type="text/javascript">
+                    var STENCIL_PATH = 'stencils';
+                    var IMAGE_PATH = 'images';
+                    var STYLE_PATH = 'styles';
+                
+                    var urlParams = (function(url)
+                    {
+                        var result = new Object();
+                        var idx = url.lastIndexOf('?');
+                
+                        if (idx > 0)
+                        {
+                            var params = url.substring(idx + 1).split('&');
+                            
+                            for (var i = 0; i < params.length; i++)
+                            {
+                                idx = params[i].indexOf('=');
+                                
+                                if (idx > 0)
+                                {
+                                    result[params[i].substring(0, idx)] = params[i].substring(idx + 1);
+                                }
+                            }
+                        }
+                        
+                        return result;
+                    })(window.location.href);
+
+                    // Sets the base path, the UI language via URL param and configures the
+                    // supported languages to avoid 404s. The loading of all core language
+                    // resources is disabled as all required resources are in grapheditor.
+                    // properties. Note that in this example the loading of two resource
+                    // files (the special bundle and the default bundle) is disabled to
+                    // save a GET request. This requires that all resources be present in
+                    // each properties file since only one file is loaded.
+                    var mxLoadResources = false;
+                    var mxBasePath = '../../../src';
+                </script>
+                <script type="text/javascript" src="${this.vscodeResource['sanitizer/sanitizer.min.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Graph.js']}"></script>
+                <script type="text/javascript" src="${this.vscodeResource['js/Shapes.js']}"></script>
+            </head>
+            <body class="geEditor">
+                Input:
+                <br />
+                <textarea rows="24" cols="100" id="textarea" placeholder="mxGraphModel"></textarea>
+                <br />
+                <button onclick="show(document.getElementById('textarea').value);return false;">Show</button>
+                <div id="graph"></div>
+                <script type="text/javascript">
+                    var graph = new Graph(document.getElementById('graph'));
+                    graph.resizeContainer = true;
+                    graph.setEnabled(false);
+
+                    function show(data)
+                    {
+                        var xmlDoc = mxUtils.parseXml(data);
+                        var codec = new mxCodec(xmlDoc);
+                        codec.decode(xmlDoc.documentElement, graph.getModel());
+                    };
+                </script>
+            </body>
+            </html>`
         }
 }
 
@@ -244,9 +296,10 @@ function activate(context) {
         // panel.webview.html = getWebviewContent(catGifSrc);
         //panel.webview.html = vsgraph.getWebviewContent(catGifSrc);
         // console.log(vsgraph.getHelloWorld());
-        panel.webview.html = vsgraph.getHelloWorld();
+        // panel.webview.html = vsgraph.getHelloWorld();
         // TODO - full client...
         // panel.webview.html = vsgraph.getIndexHtml();
+        panel.webview.html = vsgraph.getViewerHtml();
 
 
         // Display a message box to the user
