@@ -18,6 +18,9 @@ class VSGraph {
     // e.g. <script type="text/javascript" src="${this.vscodeResource['mxClient.js']}"></script>
     addResources(extensionPath){
         this.extensionPath = extensionPath;
+        // '' refers to the vscode-resource root directory so that mxClient can access css
+        this.addResource('');
+
         // get all the local resources required for VSGraph
         this.addResource('mxClient.js');
         this.addResource('js/Init.js');
@@ -92,9 +95,8 @@ class VSGraph {
             </html>`;
         }
 
+        // main graph app (work in progress)
         getIndexHtml(){
-            this.addResource('js\URLParams.js');
-            this.addResource('\\');
             console.log(this.vscodeResource);
             return `
             <html>
@@ -134,7 +136,9 @@ class VSGraph {
             
                 // Default resources are included in grapheditor resources
                 var mxLoadResources = false;
-                var mxBasePath = "${this.extensionPath}//";
+                // '' refers to the vscode-resource root directory so that mxClient can access css
+                var mxBasePath = "${this.vscodeResource['']}";
+                console.log(mxBasePath);
                 </script>
                 <script type="text/javascript" src="${this.vscodeResource['js/Init.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['deflate/pako.min.js']}"></script>
@@ -318,7 +322,7 @@ function activate(context) {
 
         // load local resources from extensionPath/vscode-resource
         vsgraph.addResources(context.extensionPath);
-
+        console.log(context.extensionPath);
         panel.webview.html = vsgraph.getHelloWorld();
         // panel.webview.html = vsgraph.getViewerHtml();
         // TODO - full client...
