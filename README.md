@@ -10,10 +10,10 @@ https://github.com/jgraph/mxgraph (portions of the code can be found in the mxgr
 ## Features
 
 Current:
-* Nothing yet
+* Working webview with Graph capability (missing important usable features)
 
 Planned:
-* Working webview with Graph capability
+* Refactor to work with files etc
 
 ## Requirements
 
@@ -41,6 +41,10 @@ Users appreciate release notes as you update your extension.
 ### 0.1.0
 
 * Hello World example, with vscode-resource management pattern
+
+### 0.2.0
+
+* Graph Editor example, based on example for mxGraph and Draw.io
 
 ### 1.0.0
 

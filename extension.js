@@ -44,6 +44,7 @@ class VSGraph {
 
         // mxClient internal resources
         this.addResource('resources');
+        this.addResource('resources/grapheditor'); //dirty hack?
         // the following may be obsolete?
         this.addResource('resources/grapheditor.txt');
         this.addResource('resources/grapheditor_de.txt');
@@ -143,7 +144,8 @@ class VSGraph {
                 var mxBasePath = "${this.vscodeResource['']}";
                 var STYLE_PATH = "${this.vscodeResource['styles']}";
                 var RESOURCE_PATH = "${this.vscodeResource['resources']}";
-                var RESOURCE_BASE = mxBasePath;
+                var RESOURCE_BASE = "${this.vscodeResource['resources/grapheditor']}";
+                // var RESOURCE_BASE = RESOURCE_PATH + "/grapheditor";
                 </script>
                 <script type="text/javascript" src="${this.vscodeResource['js/Init.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['deflate/pako.min.js']}"></script>
@@ -199,6 +201,8 @@ class VSGraph {
                                     // Adds required resources (disables loading of fallback properties, this can only
                                     // be used if we know that all keys are defined in the language specific file)
                                     // mxResources.loadDefaultBundle = false;
+                                    console.log(RESOURCE_PATH);
+                                    console.log(RESOURCE_BASE);
                                     var bundle = mxResources.getDefaultBundle(RESOURCE_BASE, mxLanguage) ||
                                             mxResources.getSpecialBundle(RESOURCE_BASE, mxLanguage);
                                     // Fixes possible asynchronous requests
@@ -212,7 +216,6 @@ class VSGraph {
                                             themes[Graph.prototype.defaultThemeName] = xhr[1].getDocumentElement();
 
                                             // Main
-                                            var urlParams = URLParams(window.location.href);
                                             new EditorUi(new Editor(urlParams['chrome'] == '0', themes));
                                     }, function()
                                     {
@@ -327,14 +330,14 @@ function activate(context) {
 
         // load local resources from extensionPath/vscode-resource
         vsgraph.addResources(context.extensionPath);
-        console.log(context.extensionPath);
+        // console.log(context.extensionPath);
         // panel.webview.html = vsgraph.getHelloWorld();
         // panel.webview.html = vsgraph.getViewerHtml();
         // TODO - full client...
         panel.webview.html = vsgraph.getIndexHtml();
         
         // Display a message box to the user
-        vscode.window.showInformationMessage('Hello Graphs! Maybe?');
+        vscode.window.showInformationMessage('Hello Graphs!');
 
         //Clean up
         panel.onDidDispose(() => {/*any clean up code goes here */}, null, context.subscriptions)
