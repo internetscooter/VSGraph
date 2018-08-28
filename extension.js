@@ -34,6 +34,7 @@ class VSGraph {
         this.addResource('js/Menus.js');
         this.addResource('js/Toolbar.js');
         this.addResource('js/Dialogs.js');
+        this.addResource('styles');
         this.addResource('styles/grapheditor.css');
         this.addResource('images/grid.gif');
         this.addResource('deflate/pako.min.js');
@@ -42,6 +43,8 @@ class VSGraph {
         this.addResource('sanitizer/sanitizer.min.js');
 
         // mxClient internal resources
+        this.addResource('resources');
+        // the following may be obsolete?
         this.addResource('resources/grapheditor.txt');
         this.addResource('resources/grapheditor_de.txt');
         this.addResource('resources/help.html');
@@ -138,7 +141,9 @@ class VSGraph {
                 var mxLoadResources = false;
                 // '' refers to the vscode-resource root directory so that mxClient can access css
                 var mxBasePath = "${this.vscodeResource['']}";
-                console.log(mxBasePath);
+                var STYLE_PATH = "${this.vscodeResource['styles']}";
+                var RESOURCE_PATH = "${this.vscodeResource['resources']}";
+                var RESOURCE_BASE = mxBasePath;
                 </script>
                 <script type="text/javascript" src="${this.vscodeResource['js/Init.js']}"></script>
                 <script type="text/javascript" src="${this.vscodeResource['deflate/pako.min.js']}"></script>
@@ -323,10 +328,10 @@ function activate(context) {
         // load local resources from extensionPath/vscode-resource
         vsgraph.addResources(context.extensionPath);
         console.log(context.extensionPath);
-        panel.webview.html = vsgraph.getHelloWorld();
+        // panel.webview.html = vsgraph.getHelloWorld();
         // panel.webview.html = vsgraph.getViewerHtml();
         // TODO - full client...
-        // panel.webview.html = vsgraph.getIndexHtml();
+        panel.webview.html = vsgraph.getIndexHtml();
         
         // Display a message box to the user
         vscode.window.showInformationMessage('Hello Graphs! Maybe?');
