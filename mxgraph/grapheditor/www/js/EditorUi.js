@@ -977,7 +977,9 @@ EditorUi.prototype.toolbarHeight = 34;
 /**
  * Specifies the height of the footer. Default is 28.
  */
-EditorUi.prototype.footerHeight = 28;
+// EditorUi.prototype.footerHeight = 28;
+// Remove footer as we do not need it in VSGraph
+EditorUi.prototype.footerHeight = 0;
 
 /**
  * Specifies the height of the optional sidebarFooterContainer. Default is 34.
